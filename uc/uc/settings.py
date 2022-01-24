@@ -86,7 +86,7 @@ if os.environ.get('GITHUB_WORKFLOW'):
            'ENGINE': 'django.db.backends.postgresql',
            'NAME': 'uc_db_ci',
            'USER': 'uc_ci',
-           'PASSWORD': 'uc_db',
+           'PASSWORD': 'uc_ci',
            'HOST': 'localhost',
            'PORT': '5432',
         }
