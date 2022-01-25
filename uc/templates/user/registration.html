@@ -2,10 +2,8 @@
 
 {% block title %}Registration{% endblock %}
 {% block content %}
-<div>
-    <div class="text-center mb-5">
-        <h1>Add your data</h1>
-    </div>
+<div class="mb-3">
+    <h1 class="mb-5">Add your data</h1>
     <form method="post" role="form">
         {% csrf_token %}
         <div class="form-group">
@@ -21,4 +19,5 @@
         <button class="btn btn-primary mt-3" type="submit">Sign in</button>
     </form>
 </div>
+<a href="{% url 'user_login' %}">Back</a>
 {% endblock %}
