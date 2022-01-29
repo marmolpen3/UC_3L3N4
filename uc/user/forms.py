@@ -9,11 +9,10 @@ class RegisterForm(forms.Form):
 
     def is_valid(self):
         valid = super(RegisterForm, self).is_valid()
-        username = self.cleaned_data.get('username')
-        password = self.cleaned_data.get('password')
-        confirm_password = self.cleaned_data.get('confirm_password')
-        print(User.objects.filter(username=username).exists())
-        if password != confirm_password or User.objects.filter(username=username).exists():
-            valid = False
-
+        if valid:
+            username = self.cleaned_data.get('username')
+            password = self.cleaned_data.get('password')
+            confirm_password = self.cleaned_data.get('confirm_password')
+            if password != confirm_password or User.objects.filter(username=username).exists():
+                valid = False
         return valid

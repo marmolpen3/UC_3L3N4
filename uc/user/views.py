@@ -18,7 +18,6 @@ class Register(FormView):
     success_url = reverse_lazy('user_login')
 
     def form_valid(self, form, **kwargs):
-        print(form.cleaned_data)
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
         new_user = User.objects.create_user(username=username, password=password)
