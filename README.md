@@ -27,31 +27,31 @@ To run the code, you need to do some configuration. First of all, you need to cr
     git clone https://github.com/marmolpen3/UC_3L3N4.git
     ```
 
-5.  Activate the virtualenv.
+4.  Activate the virtualenv.
 
     ```sh
     source ../uc/bin/activate
     ```
 
-6.  Download all the dependencies.
+5.  Download all the dependencies.
 
     ```sh
     pip install -r requirements.txt
     ```
 
-7.  Create an `.env` file with the following content.
+6.  Create an `.env` file with the following content.
 
     ```text
     SECRET_KEY = 'SECRET'
     ```
 
-8.  Do the migrations.
+7.  Do the migrations.
 
     ```sh
     python manage.py migrate
     ```
 
-9.  Run the server.
+8.  Run the server.
 
     ```sh
     python manage.py runserver
