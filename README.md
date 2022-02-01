@@ -9,35 +9,50 @@ Here you can see the first class model:
 
 To run the code, you need to do some configuration. First of all, you need to create a virtual environment to download all the dependencies of the project. I recommend you to create a folder to add the virtualenv and download the project from GitHub. You can follow these steps:
 
-1. Create a workspace for this project.
-    ```
+1.  Create a workspace for this project.
+
+    ```sh
     mkdir workspace_uc
     ```
-2. Create a virtual environment.
-    ```
+
+2.  Create a virtual environment.
+
+    ```sh
     python3 -m venv uc
     ```
-3. Clone the project, open with vscode or similar IDE and open a terminal.
-    ```
+
+3.  Clone the project, open with vscode or similar IDE and open a terminal.
+
+    ```sh
     git clone https://github.com/marmolpen3/UC_3L3N4.git
     ```
-4. Activate the virtualenv.
-    ```
+
+5.  Activate the virtualenv.
+
+    ```sh
     source ../uc/bin/activate
     ```
-5. Download all the dependencies.
-    ```
+
+6.  Download all the dependencies.
+
+    ```sh
     pip install -r requirements.txt
     ```
-6. Create an `.env` file with the following content.
-    ```
+
+7.  Create an `.env` file with the following content.
+
+    ```text
     SECRET_KEY = 'SECRET'
     ```
-7. Do the migrations.
-    ```
+
+8.  Do the migrations.
+
+    ```sh
     python manage.py migrate
     ```
-8. Run the server.
-    ```
+
+9.  Run the server.
+
+    ```sh
     python manage.py runserver
     ```
