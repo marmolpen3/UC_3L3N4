@@ -51,6 +51,7 @@ jobs:
 
   pre-deploy:
     needs: build
+    if: ${{github.ref == 'refs/heads/develop' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -59,4 +60,17 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pre-uc"
           heroku_email: "marmolpen3@alum.us.es"
-          branch: "conf/initial_project"
+          branch: "develop"
+
+  deploy:
+    needs: build
+    if: ${{github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "uc-3l3n4"
+          heroku_email: "marmolpen3@alum.us.es"
+          branch: "main"
