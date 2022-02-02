@@ -17,14 +17,14 @@ class Register(FormView):
     form_class = RegisterForm
     success_url = reverse_lazy('user_login')
 
-    def form_valid(self, form, **kwargs):
+    def form_valid(self, form):
         username = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
         new_user = User.objects.create_user(username=username, password=password)
         new_user.save()
         return super().form_valid(form)
 
-    def form_invalid(self, form, **kwargs):
+    def form_invalid(self, form):
         context = self.get_context_data(form=form)
         context['error'] = True
         return self.render_to_response(context)
