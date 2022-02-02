@@ -59,3 +59,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pre-uc"
           heroku_email: "marmolpen3@alum.us.es"
+          branch: "conf/initial_project"
