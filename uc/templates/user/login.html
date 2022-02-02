@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="mb-3">
+    <div class="text-center mb-5">
+        <h1>¡Hello!</h1>
+    </div>
+    <form method="post" role="form">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" name="username" class="form-control mb-3" id="username" placeholder="Username" required>
+            <input type="password" name="password" class="form-control mb-3" id="password" placeholder="Password" required>
+        </div>
+        {% if form.errors %}
+        <div class="alert alert-warning text-center alerta" role="alert">
+            Wrong username or password
+        </div>
+        {% endif %}
+        <button class="btn btn-primary mt-3" type="submit">Login</button>
+    </form>
+</div>
+<a class="mt-4" href="{% url 'user_register' %}">Sing in</a>
+{% endblock %}

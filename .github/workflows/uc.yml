@@ -1,0 +1,76 @@
+name: UC CI
+
+on: [ push ]
+
+env:
+  SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
+
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: uc_ci
+          POSTGRES_PASSWORD: uc_ci
+          POSTGRES_DB: uc_db_ci
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v2
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Run migrations
+      run: |
+        cd uc/
+        python manage.py migrate
+    - name: Run Tests
+      run: |
+        cd uc/
+        coverage run --source='.' manage.py test
+        coverage xml
+    - name: Run codacy-coverage-reporter
+      uses: codacy/codacy-coverage-reporter-action@v1
+      with:
+        project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
+        coverage-reports: uc/coverage.xml
+
+  pre-deploy:
+    needs: build
+    if: ${{github.ref == 'refs/heads/develop' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "pre-uc"
+          heroku_email: "marmolpen3@alum.us.es"
+          branch: "develop"
+
+  deploy:
+    needs: build
+    if: ${{github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12
+        with:
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_app_name: "uc-3l3n4"
+          heroku_email: "marmolpen3@alum.us.es"
+          branch: "main"
