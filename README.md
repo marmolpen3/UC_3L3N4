@@ -5,6 +5,8 @@ Test application. The intention is to store the results of the users for each ch
 Here you can see the first class model:
 ![model](https://user-images.githubusercontent.com/44238816/151700130-0980dad6-626e-4b8f-8bc2-59cd5f974121.jpg)
 
+You can visit the pre-production app at [pre-uc](https://pre-uc.herokuapp.com/)
+
 ---
 
 To run the code, you need to do some configuration. First of all, you need to create a virtual environment to download all the dependencies of the project. I recommend you to create a folder to add the virtualenv and download the project from GitHub. You can follow these steps:

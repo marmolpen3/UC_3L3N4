@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Registration{% endblock %}
+{% block content %}
+<div class="mb-3">
+    <h1 class="mb-5">Add your data</h1>
+    <form method="post" role="form">
+        {% csrf_token %}
+        <div class="form-group">
+            <input type="text" name="username" class="form-control mb-3" id="username" placeholder="Username" required>
+            <input type="password" name="password" class="form-control mb-3" id="password" placeholder="Password" required>
+            <input type="password" name="confirm_password" class="form-control mb-3" id="confirm_password" placeholder="Confirm password" required>
+        </div>
+        {% if error %}
+        <div class="alert alert-warning text-center alerta" role="alert">
+            It isn't possible sing in this user
+        </div>
+        {% endif %}
+        <button class="btn btn-primary mt-3" type="submit">Sign in</button>
+    </form>
+</div>
+<a href="{% url 'user_login' %}">Back</a>
+{% endblock %}
