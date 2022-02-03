@@ -51,7 +51,7 @@ jobs:
 
   pre-deploy:
     needs: build
-    if: ${{github.ref == 'refs/heads/develop' }}
+    if: ${{github.ref == 'refs/heads/conf/initial_project' }}
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -60,7 +60,7 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "pre-uc"
           heroku_email: "marmolpen3@alum.us.es"
-          branch: "develop"
+          branch: "conf/initial_project"
 
   deploy:
     needs: build
