@@ -5,4 +5,3 @@ djangorestframework == 3.13.1
 coverage
 gunicorn
 django-heroku
-django-storages
