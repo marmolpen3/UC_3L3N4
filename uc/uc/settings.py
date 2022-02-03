@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
-import django_heroku
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -141,8 +140,6 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-django_heroku.settings(locals())
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
@@ -150,3 +147,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'user_index'
 LOGOUT_REDIRECT_URL = 'user_login'
+
+PROD = os.environ.get('DJANGO_PROD', os.getenv('PROD'))
+
+if PROD == 'True':
+    import django_heroku
+    django_heroku.settings(locals())
